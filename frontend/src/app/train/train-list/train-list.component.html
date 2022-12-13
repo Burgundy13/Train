@@ -1,1 +1,76 @@
-<p>train-list works!</p>
+<div class="row">
+  <div class="col my-2">
+    <form>
+      <div class="form-group">
+        <label for="from">From: </label>
+        <select
+          class="form-control"
+          name="from"
+          id="from"
+          (change)="fromSelectChange($event)"
+        >
+          <option value="">Any</option>
+          <option
+            value="{{ itemStation.name }}"
+            *ngFor="let itemStation of travels"
+          >
+            {{ itemStation.name }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="to">To: </label>
+        <select
+          class="form-control"
+          name="to"
+          id="to"
+          (change)="toSelectChange($event)"
+        >
+          <option value="">Any</option>
+          <option
+            value="{{ itemStation.name }}"
+            *ngFor="let itemStation of travels"
+          >
+            {{ itemStation.name }}
+          </option>
+        </select>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table class="table table-striped text-center">
+      <thead>
+        <tr style="border-bottom: 2px solid black">
+          <th scope="col">Number</th>
+          <th scope="col">From</th>
+          <th scope="col">Departure</th>
+          <th scope="col">To</th>
+          <th scope="col">Arrival</th>
+          <th scope="col">Travels</th>
+          <th scope="col">Type</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let itemTrain of trains.results">
+          <td>{{ itemTrain.number }}</td>
+          <td>{{ itemTrain.from }}</td>
+          <td>{{ itemTrain.departure | date : "dd.MM.yyyy. HH:mm" }}</td>
+          <td>{{ itemTrain.to }}</td>
+          <td>{{ itemTrain.arrival | date : "dd.MM.yyyy. HH:mm" }}</td>
+          <td>{{ convertTime(itemTrain.travels) }}</td>
+          <td><img src="{{ convertPics(itemTrain.type) }}" alt="" /></td>
+          <td>{{ itemTrain.price }}rsd</td>
+          <td>
+            <button class="btn btn-secondary" [routerLink]="[itemTrain._id]">
+              Details
+            </button>
+          </td>
+          <td><button class="btn btn-danger">Buy ticket</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

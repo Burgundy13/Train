@@ -41,11 +41,13 @@ export class Train {
 }
 
 export class Station {
+  _id: number;
   name: string;
   departure: Date;
   arrival: Date;
 
   constructor(obj?: any) {
+    this._id = (obj && obj._id) || 0;
     this.name = (obj && obj.name) || '';
     this.departure = (obj && new Date(obj.departure)) || null;
     this.arrival = (obj && new Date(obj.arrival)) || null;
