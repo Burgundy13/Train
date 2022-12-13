@@ -10,6 +10,7 @@ import { TrainService } from 'src/app/service/train.service';
 })
 export class TrainDetailsComponent implements OnInit {
   train: Train = new Train();
+
   constructor(private service: TrainService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {

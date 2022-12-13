@@ -26,9 +26,9 @@ export class Train {
     this._id = (obj && obj._id) || 0;
     this.number = (obj && obj.number) || 0;
     this.from = (obj && obj.from) || '';
-    this.departure = (obj && new Date(obj.departure)) || null;
+    this.departure = (obj && obj.departure && new Date(obj.departure)) || null;
     this.to = (obj && obj.to) || '';
-    this.arrival = (obj && new Date(obj.arrival)) || null;
+    this.arrival = (obj && obj.arrival && new Date(obj.arrival)) || null;
     this.travels = (obj && obj.travels) || 0;
     this.type = (obj && obj.type) || 0;
     this.price = (obj && obj.price) || 0;
@@ -49,7 +49,7 @@ export class Station {
   constructor(obj?: any) {
     this._id = (obj && obj._id) || 0;
     this.name = (obj && obj.name) || '';
-    this.departure = (obj && new Date(obj.departure)) || null;
-    this.arrival = (obj && new Date(obj.arrival)) || null;
+    this.departure = (obj && obj.departure && new Date(obj.departure)) || null;
+    this.arrival = (obj && obj.arrival && new Date(obj.arrival)) || null;
   }
 }

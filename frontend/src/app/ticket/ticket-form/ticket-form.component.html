@@ -1,1 +1,95 @@
-<p>ticket-form works!</p>
+<div class="row">
+  <div class="col">
+    <form style="width: 70%; margin: 10px auto" [formGroup]="form">
+      <div class="form-group">
+        <label for="number">Train Number</label>
+        <input
+          type="number"
+          id="number"
+          class="form-control"
+          formControlName="number"
+          [attr.disabled]="disabled"
+        />
+      </div>
+      <div class="row">
+        <div class="form-group col-6">
+          <label for="from">From</label>
+          <input
+            type="text"
+            id="from"
+            class="form-control"
+            formControlName="from"
+            [attr.disabled]="disabled"
+          />
+        </div>
+        <div class="form-group col-6">
+          <label for="departure">Departure</label>
+          <input
+            type="datetime-local"
+            id="departure"
+            class="form-control"
+            value="{{ train.departure | date : 'yyyy-MM-ddThh:mm:ss.SSS' }}"
+            formControlName="departure"
+            [attr.disabled]="disabled"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-6">
+          <label for="to">To</label>
+          <input
+            type="text"
+            id="to"
+            class="form-control"
+            formControlName="to"
+            [attr.disabled]="disabled"
+          />
+        </div>
+        <div class="form-group col-6">
+          <label for="arrival">Arrival</label>
+          <input
+            type="datetime-local"
+            id="arrival"
+            class="form-control"
+            value="{{ train.arrival | date : 'yyyy-MM-ddThh:mm:ss.SSS' }}"
+            formControlName="arrival"
+            [attr.disabled]="disabled"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input
+          type="number"
+          id="price"
+          class="form-control"
+          formControlName="price"
+          [attr.disabled]="disabled"
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          formControlName="name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="birthDate">Birth Date</label>
+        <input
+          type="datetime-local"
+          id="birthDate"
+          class="form-control"
+          formControlName="birthDate"
+        />
+      </div>
+      <div class="form-check text-center my-3">
+        <button type="submit" class="btn btn-danger" (click)="postTicket()">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
