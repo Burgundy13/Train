@@ -68,7 +68,14 @@
               Details
             </button>
           </td>
-          <td><button class="btn btn-danger">Buy ticket</button></td>
+          <td>
+            <button
+              class="btn btn-danger"
+              [routerLink]="[itemTrain._id, 'ticketform']"
+            >
+              Buy ticket
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
