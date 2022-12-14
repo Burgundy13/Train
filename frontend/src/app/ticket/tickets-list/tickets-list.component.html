@@ -1,1 +1,45 @@
-<p>tickets-list works!</p>
+<ngb-accordion>
+  <ngb-panel
+    *ngFor="let itemTicket of tickets.results"
+    title="{{ itemTicket.from }} ({{
+      itemTicket.departure | date : 'dd.MM.yyyy. HH:mm'
+    }}) - {{ itemTicket.to }} ({{
+      itemTicket.arrival | date : 'dd.MM.yyyy. HH:mm'
+    }})"
+  >
+    <ng-template ngbPanelContent>
+      <div class="row">
+        <div class="col-9">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>Train number</th>
+                <td>{{ itemTicket.number }}</td>
+              </tr>
+              <tr>
+                <th>Price</th>
+                <td>{{ itemTicket.price }}rsd</td>
+              </tr>
+              <tr>
+                <th>Name</th>
+                <td>{{ itemTicket.name }}</td>
+              </tr>
+              <tr>
+                <th>Birth date</th>
+                <td>{{ itemTicket.birthDate | date : "dd.MM.yyyy" }}</td>
+              </tr>
+              <tr style="border-style: hidden">
+                <td>
+                  <button class="btn btn-danger">Cancel</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-3">
+          <img src="assets/images/qr.png" alt="qr-image" />
+        </div>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>

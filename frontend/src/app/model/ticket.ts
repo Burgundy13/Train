@@ -1,4 +1,4 @@
-export class Tickets {
+export class TicketList {
   count: number;
   results: Ticket[];
 

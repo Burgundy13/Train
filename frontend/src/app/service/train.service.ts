@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Ticket } from '../model/ticket';
+import { Ticket, TicketList } from '../model/ticket';
 import { Station, Train, TrainList } from '../model/train';
 
 const trainUrl = 'http://localhost:3000/api/trains';
@@ -47,5 +47,12 @@ export class TrainService {
   }
   postTicket(ticket: Ticket): Observable<any> {
     return this.http.post(ticketUrl, ticket);
+  }
+  getAllTickets(): Observable<TicketList> {
+    return this.http.get(ticketUrl).pipe(
+      map((data: any) => {
+        return new TicketList(data);
+      })
+    );
   }
 }
