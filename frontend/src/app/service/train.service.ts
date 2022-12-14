@@ -1,10 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { Ticket } from '../model/ticket';
 import { Station, Train, TrainList } from '../model/train';
 
 const trainUrl = 'http://localhost:3000/api/trains';
 const stationUrl = 'http://localhost:3000/api/stations';
+const ticketUrl = 'http://localhost:3000/api/tickets';
 
 @Injectable({
   providedIn: 'root',
@@ -42,5 +44,8 @@ export class TrainService {
         return new Train(data);
       })
     );
+  }
+  postTicket(ticket: Ticket): Observable<any> {
+    return this.http.post(ticketUrl, ticket);
   }
 }

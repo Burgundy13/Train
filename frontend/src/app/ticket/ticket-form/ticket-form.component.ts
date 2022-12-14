@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Ticket } from 'src/app/model/ticket';
 import { Train } from 'src/app/model/train';
 import { TrainService } from 'src/app/service/train.service';
 
@@ -12,6 +13,7 @@ import { TrainService } from 'src/app/service/train.service';
 export class TicketFormComponent implements OnInit {
   train: Train = new Train();
   disabled: boolean = false;
+
   form: FormGroup = new FormGroup({
     number: new FormControl(''),
     from: new FormControl(''),
@@ -22,7 +24,17 @@ export class TicketFormComponent implements OnInit {
     name: new FormControl('', Validators.required),
     birthDate: new FormControl('', Validators.required),
   });
-  constructor(private service: TrainService, private route: ActivatedRoute) {}
+  get name() {
+    return this.form.get('name');
+  }
+  get birthDate() {
+    return this.form.get('birthDate');
+  }
+  constructor(
+    private service: TrainService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getTrain();
@@ -32,8 +44,8 @@ export class TicketFormComponent implements OnInit {
       this.service.getOneTrainInfo(params['id']).subscribe({
         next: (response: Train) => {
           this.train = response;
+
           this.form.patchValue(response);
-          console.log(response);
         },
         error: (response: any) => {
           console.log('Error: ', response.statusText);
@@ -42,6 +54,15 @@ export class TicketFormComponent implements OnInit {
     });
   }
   postTicket(): void {
-    console.log(this.form.value);
+    let newTicket: Ticket = new Ticket(this.form.value);
+
+    this.service.postTicket(newTicket).subscribe({
+      next: (response: Ticket) => {
+        this.router.navigate(['/mytickets']);
+      },
+      error: (response: any) => {
+        console.log('Error: ', response.statusText);
+      },
+    });
   }
 }
