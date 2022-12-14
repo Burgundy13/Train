@@ -28,9 +28,14 @@
                 <th>Birth date</th>
                 <td>{{ itemTicket.birthDate | date : "dd.MM.yyyy" }}</td>
               </tr>
-              <tr style="border-style: hidden">
+              <tr style="border-bottom-style: hidden">
                 <td>
-                  <button class="btn btn-danger">Cancel</button>
+                  <button
+                    class="btn btn-danger mt-2"
+                    (click)="deleteTicket(itemTicket._id)"
+                  >
+                    Cancel
+                  </button>
                 </td>
               </tr>
             </tbody>

@@ -48,11 +48,22 @@ export class TrainService {
   postTicket(ticket: Ticket): Observable<any> {
     return this.http.post(ticketUrl, ticket);
   }
-  getAllTickets(): Observable<TicketList> {
-    return this.http.get(ticketUrl).pipe(
+  getAllTickets(params?: any): Observable<TicketList> {
+    let options = {};
+    if (params) {
+      options = {
+        params: new HttpParams()
+          .set('sort', params.sort || '')
+          .set('sortDirection', params.sortDirection || ''),
+      };
+    }
+    return this.http.get(ticketUrl, options).pipe(
       map((data: any) => {
         return new TicketList(data);
       })
     );
+  }
+  deleteTicket(id: number): Observable<any> {
+    return this.http.delete(`${ticketUrl}/${id}`);
   }
 }
